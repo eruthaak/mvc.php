@@ -1,2 +1,5 @@
 <?php
-  require view('index');
+
+echo method();
+
+require view('index');

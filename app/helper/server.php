@@ -4,7 +4,8 @@
  * Gets a value from $_SERVER global array.
  * @author Beresyus
  */
-function server(mixed $key) {
-  if( isset($_SERVER[$key]) ) return $_SERVER[$key];
+function server($key, $value = NULL) {
+  if( isset($value) ) $_SERVER[strtoupper($key)] = $value;
+  if( isset($_SERVER[strtoupper($key)]) ) return $_SERVER[strtoupper($key)];
   return false;
 }

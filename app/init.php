@@ -11,4 +11,4 @@
   Helper::Load(); // Helpers loading.
 
   require 'system/config.php'; // Settings.
-  // $db = new Database(DB_CREDENTIALS, DB_USERNAME, DB_PASSWORD, APP_DEBUG); // Database connection.
+  $db = new Database(DB_CREDENTIALS, DB_USERNAME, DB_PASSWORD); // Database connection.

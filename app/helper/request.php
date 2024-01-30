@@ -85,13 +85,17 @@ function requestHeaders($name) {
  */
 function csrf() {
   global $csrfToken;
-  echo '<input name="csrf" value="' . $csrfToken . '">';
+  return '<input type="hidden" name="csrf" value="' . $csrfToken . '">';
 }
 
 /**
  * Use specified HTTP method on a form.
  * @author Beresyus
  */
-function method($method) {
-  echo '<input name="_method" value="' . $method . '">';
+function method($method = NULL) {
+  if(isset($method)) {
+    return '<input type="hidden" name="_method" value="' . $method . '">';
+  } else {
+    return server('REQUEST_METHOD', post('_method') ? post('_method') : 'GET');
+  }
 }
