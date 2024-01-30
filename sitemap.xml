@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <name>Ana Sayfa</name>
+    <loc>https://www.imugenoteam.com/</loc> <!-- Ana sayfa URL'si -->
+    <lastmod>2023-12-29</lastmod> <!-- Son güncelleme tarihi -->
+    <changefreq>monthly</changefreq> <!-- Değişiklik sıklığı (always, hourly, daily, weekly, monthly, yearly, never gibi) -->
+    <priority>1.0</priority> <!-- Öncelik (0.0 ile 1.0 arasında değer) -->
+  </url>
+  <url>
+    <name>Bloglar</name>
+    <loc>https://www.imugenoteam.com/blogs</loc>
+    <lastmod>2023-12-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>
