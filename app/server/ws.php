@@ -20,9 +20,16 @@
 			$header = socket_read($newSocket, 1024); // Read data sent by the socket
 			handshake($header, $newSocket, WS_HOST, WS_PORT); // Perform websocket handshake
 
-			// socket_getpeername($newSocket, $ip); // Get IP address of connected socket.
-			// $response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); // Prepare json data
-			// send($response); // Notify all users about new connection
+			socket_getpeername($newSocket, $ip); // Get IP address of connected socket.
+			$response = mask(
+				json_encode(
+					array(
+						'type'=>'system',
+						'message'=> $ip.' connected'
+					)
+				 ) // Prepare json data
+			); 
+			send($response); // Notify all users about new connection
 
 			$foundSocket = array_search($socket, $changed); // Make room for new socket
 			unset($changed[$foundSocket]);
@@ -33,7 +40,11 @@
 				$received_text = unmask($buf); // Unmask data
 				$data = (array) json_decode($received_text, true); // Json decode
 
-				$response_text = mask(json_encode($data)); // Prepare data to be sent to client
+				$response_text = mask(
+					json_encode(
+						$data
+					)
+				); // Prepare data to be sent to client
 				send($response_text); // Send data
 				break 2; // Exist this loop
 			}
@@ -46,8 +57,15 @@
 
 				// Notify all users about disconnected connection
 
-				// $response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' disconnected')));
-				// send($response);
+				$response = mask(
+					json_encode(
+						array(
+							'type'=> 'system', 
+							'message'=> $ip.' disconnected'
+						)
+					)
+				);
+				send($response);
 			}
 		}
 	}
@@ -99,7 +117,7 @@
 	}
 
 	// Handshake new client.
-	function handshake($receivedHeader, $clientConnection, $host, $port, $uri = '/ws') {
+	function handshake($receivedHeader, $clientConnection, $host, $port) {
 		$headers = array();
 		$lines = preg_split("/\r\n/", $receivedHeader);
 		foreach($lines as $line) {
@@ -116,7 +134,7 @@
                 "Upgrade: websocket\r\n" .
                 "Connection: Upgrade\r\n" .
                 "WebSocket-Origin: $host\r\n" .
-                "WebSocket-Location: ws://$host:$port$uri\r\n".
+                "WebSocket-Location: ws://$host:$port\r\n".
                 "Sec-WebSocket-Accept: $secAccept\r\n\r\n";
 		socket_write($clientConnection, $upgrade, strlen($upgrade));
 	}
