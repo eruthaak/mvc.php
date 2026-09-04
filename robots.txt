@@ -1,4 +1,0 @@
-User-Agent: *
-Disallow: /auth/*
-Disallow: /panel/*
-Sitemap: https://localhost/imugenoteam.test/sitemap.xml
