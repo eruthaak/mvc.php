@@ -1,0 +1,7 @@
+# .gitignore
+
+# Diğer ignore kuralları
+...
+
+# assets/vendor klasörü altındaki her şeyi ignore et
+assets/vendor/*
